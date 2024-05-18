@@ -1,0 +1,47 @@
+create table loan
+(
+    LOAN_KEY           int auto_increment
+        primary key,
+    PROD_KEY           int                       default -1                not null,
+    CCY_KEY            int                       default -1                not null,
+    LOAN_TP_KEY        int                       default -1                not null,
+    LOAN_PURP_KEY      int                       default -1                not null,
+    LOAN_SPHERE_KEY    int                       default -1                not null,
+    LOAN_INDUSTR_KEY   int                       default -1                not null,
+    LOAN_STAT_KEY      int                       default -1                not null,
+    PMT_MODE_KEY       int                       default -1                not null,
+    REPMT_MODE_KEY     int                       default -1                not null,
+    RESTRUCT_TP_KEY    int                       default -1                not null,
+    REFIN_TP_KEY       int                       default -1                not null,
+    PER_FRQ_KEY        int                       default -1                not null,
+    COLL_STAT_KEY      int                       default -1                not null,
+    COLL_DATE          date                      default '1000-01-01'      null,
+    NOM_AMT            decimal(19, 3)            default 0.000             null,
+    LMT_AMT            decimal(19, 3)            default 0.000             null,
+    FIRST_DISB_DATE    date                      default '1000-01-01'      null,
+    OVDU_DATE          date                      default '1000-01-01'      null,
+    FIRST_PMT_DATE     date                      default '1000-01-01'      null,
+    REFIN_FLAG         int                       default -1                not null,
+    REFIN_DATE         date                      default '1000-01-01'      null,
+    DFLT_RESTRUCT_FLAG int                       default -1                not null,
+    DFLT_RESTRUCT_DATE date                      default '1000-01-01'      null,
+    PRLNGTN_FLAG       int                       default -1                not null,
+    PRLNGTN_CNT        int                       default -1                null,
+    PRLNGTN_DATE       date                      default '1000-01-01'      null,
+    PMT                decimal(19, 3)            default 0.000             null,
+    SRC_ID             varchar(255) charset utf8 default ''                not null,
+    SRC_SYS_ID         varchar(255) charset utf8 default ''                not null,
+    DEL_FLAG           smallint                  default 0                 not null,
+    INS_PROCESS_ID     varchar(255) charset utf8 default ''                not null,
+    INS_DT             datetime                  default CURRENT_TIMESTAMP not null,
+    UPD_PROCESS_ID     varchar(255) charset utf8 default ''                not null,
+    UPD_DT             datetime                  default CURRENT_TIMESTAMP not null,
+    UPD_EFF_DATE       datetime                  default CURRENT_TIMESTAMP not null,
+    SRC_UPD_DT         datetime                  default CURRENT_TIMESTAMP not null,
+    PART_ID            varchar(255) charset utf8 as (`SRC_SYS_ID`) stored,
+    constraint unique_src
+        unique (SRC_ID, SRC_SYS_ID),
+    constraint FK_LOAN_PROD
+        foreign key (PROD_KEY) references prod (PROD_KEY)
+);
+
